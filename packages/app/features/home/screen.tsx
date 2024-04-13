@@ -13,15 +13,19 @@ import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 import { useLink } from 'solito/navigation'
 
-export function HomeScreen() {
+export async function HomeScreen() {
   const linkProps = useLink({
     href: '/user/nate',
   })
 
+  const data = await fetch('https://dummyjson.com/products').then((res) => res.json())
+
+  console.log('products ', data.products.length)
+
   return (
     <YStack f={1} jc="center" ai="center" p="$4" gap="$4">
       <YStack gap="$4" bc="$background">
-        <H1 ta="center">Welcome to Tamagui.</H1>
+        <H1 ta="center">Welcome to Tamagui. {data.products.length}</H1>
         <Paragraph ta="center">
           Here's a basic starter to show navigating from one screen to another. This screen uses the
           same code on Next.js and React Native.
